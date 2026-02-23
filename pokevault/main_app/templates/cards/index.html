@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>All Cards</h1>
+{% for card in cards %}
+<div>
+  <h2>{{ card.name }}</h2>
+  <p>Set: {{ card.set_name }}</p>
+  <p>Rarity: {{ card.rarity }}</p>
+  <p>{{ card.description }}</p>
+</div>
+{% endfor %}
+{% endblock %}
