@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import Card
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 # class Card:
 #     def __init__(self, name, set_name, rarity, description):
@@ -22,6 +24,22 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
-def card_index(request):
-    cards = Card.objects.all()
-    return render(request, 'cards/index.html', {'cards': cards})
+class CardList(ListView):
+    model = Card
+    template_name = 'cards/index.html'
+
+class CardDetail(DetailView):
+    model = Card
+    template_name = 'cards/detail.html'
+
+class CardCreate(CreateView):
+    model = Card
+    fields = ['name', 'set_name', 'rarity', 'description']
+
+class CardUpdate(UpdateView):
+    model = Card
+    fields = ['name', 'set_name', 'rarity', 'description']
+
+class CardDelete(DeleteView):
+    model = Card
+    success_url = '/cards'

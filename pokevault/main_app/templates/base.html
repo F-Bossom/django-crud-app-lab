@@ -9,8 +9,9 @@
     <header>
       <nav>
         <a href="/">Home</a>
-        <a href="/cards">All Cards</a>
-        <a href="/about">About</a>
+        <a href="{% url 'card-index' %}">All Cards</a>
+        <a href="{% url 'card-create' %}">Add a Card</a>
+        <a href="{% url 'about' %}">About</a>
       </nav>
     </header>
     <main>{% block content %} {% endblock %}</main>

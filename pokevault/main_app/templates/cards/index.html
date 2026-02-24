@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>All Cards</h1>
-{% for card in cards %}
+{% for card in object_list %}
 <div>
-  <h2>{{ card.name }}</h2>
+  <a href="{% url 'card-detail' card.id %}">
+    <h2>{{ card.name }}</h2>
+  </a>
   <p>Set: {{ card.set_name }}</p>
   <p>Rarity: {{ card.rarity }}</p>
   <p>{{ card.description }}</p>
