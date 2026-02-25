@@ -1,0 +1,113 @@
+.page-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.page-header p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  display: block;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--pokered), var(--pokeyellow));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--card-shadow);
+  border-color: var(--pokeyellow);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card-rarity {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: rgba(255, 215, 0, 0.15);
+  color: var(--pokeyellow);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  margin-bottom: 12px;
+}
+
+.card h2 {
+  font-size: 1.2rem;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.card-set {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+}
+
+.card-description {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.pokeball-icon {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 8px solid rgba(255,255,255,0.05);
+  opacity: 0.3;
+}
+
+.add-card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--pokered);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  transition: all 0.2s ease;
+}
+
+.add-card-btn:hover {
+  background: #c42d0a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(227, 53, 13, 0.4);
+  color: white;
+}

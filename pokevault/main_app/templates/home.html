@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Welcome to PokeVault!</h1>
-<p>Your personal Pokemon card collection.</p>
+<div style="text-align: center; padding: 60px 20px;">
+    <h1>Welcome to PokeVault!</h1>
+    <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px;">Your personal Pokémon card collection tracker.</p>
+    <a href="{% url 'card-index' %}" class="btn btn-primary" style="font-size: 1rem; padding: 14px 32px;">View My Collection</a>
+</div>
 {% endblock %}

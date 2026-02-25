@@ -1,14 +1,23 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/cards/card-index.css' %}" />
+{% endblock %}
 {% block content %}
-<h1>All Cards</h1>
-{% for card in object_list %}
-<div>
-  <a href="{% url 'card-detail' card.id %}">
-    <h2>{{ card.name }}</h2>
-  </a>
-  <p>Set: {{ card.set_name }}</p>
-  <p>Rarity: {{ card.rarity }}</p>
-  <p>{{ card.description }}</p>
+<div class="page-header">
+    <h1>All Cards</h1>
+    <p>Your Pokémon card collection</p>
 </div>
-{% endfor %}
+<a href="{% url 'card-create' %}" class="add-card-btn">+ Add a Card</a>
+<div class="cards-grid">
+    {% for card in object_list %}
+    <a href="{% url 'card-detail' card.id %}" class="card">
+        <div class="card-rarity">{{ card.rarity }}</div>
+        <h2>{{ card.name }}</h2>
+        <p class="card-set">📦 {{ card.set_name }}</p>
+        <p class="card-description">{{ card.description }}</p>
+        <div class="pokeball-icon"></div>
+    </a>
+    {% endfor %}
+</div>
 {% endblock %}

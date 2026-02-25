@@ -1,0 +1,120 @@
+.card-detail-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.card-detail-header {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 30px;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-detail-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--pokered), var(--pokeyellow));
+}
+
+.card-detail-header h1 {
+  margin-bottom: 15px;
+}
+
+.card-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.card-meta-item {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+}
+
+.card-meta-item span {
+  color: var(--text-muted);
+  margin-right: 5px;
+}
+
+.card-meta-item strong {
+  color: var(--pokeyellow);
+}
+
+.card-description-text {
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.card-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.condition-section {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 30px;
+  margin-bottom: 24px;
+}
+
+.condition-section h2 {
+  color: var(--pokeyellow);
+  font-size: 1rem;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.condition-form {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.condition-form p {
+  margin: 0;
+  flex: 1;
+  min-width: 150px;
+}
+
+.condition-form label {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+}
+
+.condition-form input,
+.condition-form select {
+  width: 100%;
+}
+
+.condition-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.condition-mint { background: rgba(0,200,100,0.15); color: #00c864; border: 1px solid rgba(0,200,100,0.3); }
+.condition-near-mint { background: rgba(100,200,0,0.15); color: #64c800; border: 1px solid rgba(100,200,0,0.3); }
+.condition-excellent { background: rgba(255,215,0,0.15); color: var(--pokeyellow); border: 1px solid rgba(255,215,0,0.3); }
+.condition-good { background: rgba(255,140,0,0.15); color: #ff8c00; border: 1px solid rgba(255,140,0,0.3); }
+.condition-poor { background: rgba(227,53,13,0.15); color: var(--pokered); border: 1px solid rgba(227,53,13,0.3); }
