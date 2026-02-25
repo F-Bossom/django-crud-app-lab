@@ -12,6 +12,9 @@
 <div class="cards-grid">
     {% for card in object_list %}
     <a href="{% url 'card-detail' card.id %}" class="card">
+        {% if card.image_url %}
+        <img src="{{ card.image_url }}" alt="{{ card.name }}" style="width: 100%; border-radius: 8px; margin-bottom: 12px;">
+        {% endif %}
         <div class="card-rarity">{{ card.rarity }}</div>
         <h2>{{ card.name }}</h2>
         <p class="card-set">📦 {{ card.set_name }}</p>

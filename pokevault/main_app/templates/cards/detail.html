@@ -6,6 +6,9 @@
 {% block content %}
 <div class="card-detail-container">
     <div class="card-detail-header">
+        {% if card.image_url %}
+        <img src="{{ card.image_url }}" alt="{{ card.name }}" style="width: 250px; float: right; border-radius: 8px; margin-left: 20px;">
+        {% endif %}
         <h1>{{ card.name }}</h1>
         <div class="card-meta">
             <div class="card-meta-item">

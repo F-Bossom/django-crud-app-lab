@@ -6,6 +6,7 @@ class Card(models.Model):
     set_name = models.CharField(max_length=100)
     rarity = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
+    image_url = models.URLField(max_length=500, blank=True)
 
     def __str__(self):
         return f"A card named {self.name} from the {self.set_name} set."

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Card
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from .forms import ConditionForm
+from .forms import ConditionForm, CardForm
 
 # class Card:
 #     def __init__(self, name, set_name, rarity, description):
@@ -47,11 +47,11 @@ class CardList(ListView):
 
 class CardCreate(CreateView):
     model = Card
-    fields = ['name', 'set_name', 'rarity', 'description']
+    form_class = CardForm
 
 class CardUpdate(UpdateView):
     model = Card
-    fields = ['name', 'set_name', 'rarity', 'description']
+    form_class = CardForm
 
 class CardDelete(DeleteView):
     model = Card
