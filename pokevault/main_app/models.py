@@ -1,12 +1,22 @@
 from django.db import models
 from django.urls import reverse
 
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        return reverse('tag_detail', kwargs={'pk': self.pk})
+
 class Card(models.Model):
     name = models.CharField(max_length=100)
     set_name = models.CharField(max_length=100)
     rarity = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
     image_url = models.URLField(max_length=500, blank=True)
+    tags = models.ManyToManyField(Tag)
 
     def __str__(self):
         return f"A card named {self.name} from the {self.set_name} set."

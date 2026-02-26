@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="max-width: 600px; margin: 0 auto; text-align: center;">
+    <h1>Delete Tag?</h1>
+    <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 30px;">
+        <h2>Are you sure you want to delete {{ object.name }}?</h2>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div style="display: flex; gap: 12px; justify-content: center; margin-top: 20px;">
+                <a href="{% url 'tag_list' %}" class="btn btn-warn">Cancel</a>
+                <button type="submit" class="btn btn-danger" style="border: 2px solid var(--pokered);">Yes - Delete!</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

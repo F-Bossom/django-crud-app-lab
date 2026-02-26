@@ -28,6 +28,27 @@
     </div>
 
     <div class="condition-section">
+        <h2>Tags</h2>
+        {% if card.tags.all %}
+            {% for tag in card.tags.all %}
+                <span style="background: rgba(255,215,0,0.15); color: var(--pokeyellow); border: 1px solid rgba(255,215,0,0.3); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; margin-right: 8px;">{{ tag.name }}</span>
+            {% endfor %}
+        {% else %}
+            <p style="color: var(--text-muted);">No tags yet.</p>
+        {% endif %}
+
+        {% if tags %}
+        <h2 style="margin-top: 20px;">Add a Tag</h2>
+        {% for tag in tags %}
+            <form action="{% url 'associate-tag' card.id tag.id %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary" style="margin: 4px;">+ {{ tag.name }}</button>
+            </form>
+        {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="condition-section">
         <h2>Condition Log</h2>
         <form action="{% url 'add_condition' card.id %}" method="post" class="condition-form">
             {% csrf_token %}

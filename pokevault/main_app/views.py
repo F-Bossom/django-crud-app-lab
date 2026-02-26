@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from .models import Card
+from .models import Card, Tag
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from .forms import ConditionForm, CardForm
+from django.urls import reverse
 
 # class Card:
 #     def __init__(self, name, set_name, rarity, description):
@@ -28,9 +29,11 @@ def about(request):
 def card_detail(request, pk):
     card = Card.objects.get(id=pk)
     condition_form = ConditionForm()
+    tags = Tag.objects.exclude(id__in = card.tags.all().values_list('id'))
     return render(request, 'cards/detail.html', {
         'card': card,
         'condition_form': condition_form,
+        'tags': tags,
     })
 
 def add_condition(request, card_id):
@@ -39,6 +42,10 @@ def add_condition(request, card_id):
         new_condition = form.save(commit=False)
         new_condition.card_id = card_id
         new_condition.save()
+    return redirect('card-detail', pk=card_id)
+
+def associate_tag(request, card_id, tag_id):
+    Card.objects.get(id=card_id).tags.add(tag_id)
     return redirect('card-detail', pk=card_id)
 
 class CardList(ListView):
@@ -56,3 +63,23 @@ class CardUpdate(UpdateView):
 class CardDelete(DeleteView):
     model = Card
     success_url = '/cards'
+
+class TagCreate(CreateView):
+    model = Tag
+    fields = '__all__'
+
+class TagDetail(DetailView):
+    model = Tag
+    template_name = 'tags/detail.html'
+
+class TagList(ListView):
+    model = Tag
+    template_name = 'tags/index.html'
+
+class TagUpdate(UpdateView):
+    model = Tag
+    fields = ['name']
+
+class TagDelete(DeleteView):
+    model = Tag
+    success_url = '/tags/'
