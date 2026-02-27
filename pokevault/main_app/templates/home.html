@@ -3,6 +3,19 @@
 <div style="text-align: center; padding: 60px 20px;">
     <h1>Welcome to PokeVault!</h1>
     <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px;">Your personal Pokémon card collection tracker.</p>
+    {% if not user.is_authenticated %}
+    <div style="max-width: 400px; margin: 0 auto; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 30px;">
+        <h2 style="margin-bottom: 20px;">Login</h2>
+        <form action="{% url 'home' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="hidden" name="next" value="{{ next }}" />
+            <button type="submit" style="margin-top: 10px;">Login</button>
+        </form>
+        <p style="color: var(--text-muted); margin-top: 20px;">Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
+    </div>
+    {% else %}
     <a href="{% url 'card-index' %}" class="btn btn-primary" style="font-size: 1rem; padding: 14px 32px;">View My Collection</a>
+    {% endif %}
 </div>
 {% endblock %}

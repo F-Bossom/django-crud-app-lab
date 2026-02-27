@@ -3,7 +3,10 @@ from .models import Card, Tag
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from .forms import ConditionForm, CardForm
-from django.urls import reverse
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 
 # class Card:
 #     def __init__(self, name, set_name, rarity, description):
@@ -20,12 +23,29 @@ from django.urls import reverse
 #     Card('Blastoise', 'Base Set', 'Rare Holo', 'A water type fan favourite.'),
 # ]
 
-def home(request):
-    return render(request, 'home.html')
+class Home(LoginView):
+    template_name = 'home.html'
 
 def about(request):
     return render(request, 'about.html')
 
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('card-index')
+        else:
+            error_message = 'Invalid sign up - try again'
+    form = UserCreationForm()
+    return render(request, 'signup.html', {
+        'form': form,
+        'error_message': error_message
+    })
+
+@login_required
 def card_detail(request, pk):
     card = Card.objects.get(id=pk)
     condition_form = ConditionForm()
@@ -36,6 +56,7 @@ def card_detail(request, pk):
         'tags': tags,
     })
 
+@login_required
 def add_condition(request, card_id):
     form = ConditionForm(request.POST)
     if form.is_valid():
@@ -44,6 +65,7 @@ def add_condition(request, card_id):
         new_condition.save()
     return redirect('card-detail', pk=card_id)
 
+@login_required
 def associate_tag(request, card_id, tag_id):
     Card.objects.get(id=card_id).tags.add(tag_id)
     return redirect('card-detail', pk=card_id)
@@ -52,9 +74,16 @@ class CardList(ListView):
     model = Card
     template_name = 'cards/index.html'
 
+    def get_queryset(self):
+        return Card.objects.filter(user=self.request.user)
+
 class CardCreate(CreateView):
     model = Card
     form_class = CardForm
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 class CardUpdate(UpdateView):
     model = Card

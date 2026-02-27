@@ -12,11 +12,21 @@
     <header>
       <a href="/" class="header-title">⚡ PokeVault</a>
       <nav>
+        {% if user.is_authenticated %}
         <a href="{% url 'card-index' %}">All Cards</a>
         <a href="{% url 'card-create' %}">Add a Card</a>
         <a href="{% url 'tag_list' %}">All Tags</a>
         <a href="{% url 'tag_create' %}">Add a Tag</a>
         <a href="{% url 'about' %}">About</a>
+        <form id="logout-form" method="post" action="{% url 'logout' %}" style="display: inline;">
+          {% csrf_token %}
+          <button type="submit" style="background: none; border: none; color: var(--text-light); font-family: 'Nunito', sans-serif; font-size: 0.9rem; cursor: pointer; padding: 8px 16px;">Log Out</button>
+        </form>
+        {% else %}
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'home' %}">Login</a>
+        <a href="{% url 'signup' %}">Sign Up</a>
+        {% endif %}
       </nav>
     </header>
     <main>{% block content %} {% endblock %}</main>
